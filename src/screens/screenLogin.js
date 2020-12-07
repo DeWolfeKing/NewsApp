@@ -1,9 +1,11 @@
 import React from "react";
 import { View, Text,TouchableOpacity, TextInput} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import firebase from "@react-native-firebase/app";
 import {login} from "../actions/loginActions";
 
 const LoginScreen = (props) => {
+  console.warn(firebase.app().utils().app)
 
   const dispatch = useDispatch();
   const [loginInput, onChangeLogin] = React.useState('Admin');

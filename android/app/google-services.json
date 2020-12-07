@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "44562818413",
+    "project_id": "mybestnewsapp",
+    "storage_bucket": "mybestnewsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44562818413:android:8135131dd7cb7967cce664",
+        "android_client_info": {
+          "package_name": "com.mybestnewsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44562818413-b5gplit0nlvvmtk3kv80uohn418dp2o7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mybestnewsapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "44562818413-qgenrqt7ccc6iulgkk2e98aure6eg9ts.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOZj_tNxfujo5Tllw3K5XoK1VfP4RXLCc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44562818413-qgenrqt7ccc6iulgkk2e98aure6eg9ts.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
