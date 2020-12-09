@@ -1,23 +1,23 @@
 const initialState = {
-    userName : 'Admin',
-    userPass : '123',
+    userEmail : '',
     isLoggined : false,
 };
-4
+
 const loginReducer = (state = initialState,action) => {
     switch(action.type){
         case 'LOGIN':{
             console.log(state.isLoggined)
             return {
-                ...state,
+                userEmail: action.payload.email,
                 isLoggined :true
             }
         }
         case 'LOGOUT' : {
             console.log(state.isLoggined)
             return {
-                ...state,
-                isLoggined : false
+                userEmail : '',
+                userPass : '',
+                isLoggined : false,
             }
         }
         default :

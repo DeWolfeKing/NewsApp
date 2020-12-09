@@ -1,33 +1,30 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { View, Text,TouchableOpacity, TextInput} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import firebase from "@react-native-firebase/app";
-import {login} from "../actions/loginActions";
+import {login,createUser} from "../actions/loginActions";
 
 const LoginScreen = (props) => {
-  console.warn(firebase.app().utils().app)
 
   const dispatch = useDispatch();
-  const [loginInput, onChangeLogin] = React.useState('Admin');
+  const [emailInput, onChangeEmail] = React.useState('dewolfeking@gmail.com');
   const [passInput, onChangePass] = React.useState('123');
   const resetLoginAndPass = () =>{
-    onChangeLogin('Admin')
+    onChangeEmail('dewolfeking@gmail.com')
     onChangePass("123")
   }
-
-  const toNextScreen = () => {
-    if(storeUsername === loginInput && storePassword === passInput){
-      dispatch(login())
-      props.navigation.navigate('NewsScreen')
-      resetLoginAndPass()
-    }else{
-      alert('wrong name or pass')
-    }
-  }
-  const { storeUsername, storePassword } = useSelector((state) => ({
-    storeUsername: state.loginReducer.userName,
-    storePassword: state.loginReducer.userPass
-  }))
+  // const toNextScreen = () => {
+  //   if(storeUsername === loginInput && storePassword === passInput){
+  //     dispatch(login())
+  //     props.navigation.navigate('NewsScreen')
+  //     resetLoginAndPass()
+  //   }else{
+  //     alert('wrong name or pass')
+  //   }
+  // }
+  // const { storeUsername, storePassword } = useSelector((state) => ({
+  //   storeUsername: state.loginReducer.userName,
+  //   storePassword: state.loginReducer.userPass
+  // }))
   return (
     <View style={{
       padding: 40,
@@ -37,8 +34,8 @@ const LoginScreen = (props) => {
       <View style={{alignItems:"center"}}>
         <TextInput
           style={{ height: 40,width: 300, borderColor: 'gray', borderWidth: 1 }}
-          onChangeText={text => onChangeLogin(text)}
-          value={loginInput}      
+          onChangeText={text => onChangeEmail(text)}
+          value={emailInput}
         />
         <TextInput
           style={{ height: 40,width: 300, borderColor: 'gray', borderWidth: 1 }}
@@ -46,9 +43,15 @@ const LoginScreen = (props) => {
           value={passInput} 
         />
         <TouchableOpacity style={{backgroundColor:"white",borderWidth:1,borderRadius:5,width:100,height:40,alignItems:'center',marginTop:5}}
-                          onPress={() => toNextScreen()}>
+                          onPress={() => dispatch(login(emailInput,passInput))}
+             >
           <Text style={{fontSize:26}}>Login</Text>
         </TouchableOpacity>
+         <TouchableOpacity style={{backgroundColor:"white",borderWidth:1,borderRadius:5,width:200,height:40,alignItems:'center',marginTop:5}}
+                            onPress={() => dispatch(createUser(emailInput,passInput))}
+         >
+              <Text style={{fontSize:26}}>Registration</Text>
+         </TouchableOpacity>
       </View>
     </View> 
   );

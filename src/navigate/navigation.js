@@ -10,7 +10,7 @@ import AddToDo from '../screens/screenAddToDo';
 import NewsScreen from "../screens/screenNews";
 import DetailsNewsScreen from "../screens/screenDetailsNews";
 import createSagaMiddleware from 'redux-saga'
-import mySaga from "../components/sagas";
+import mySaga from "../sagas/sagas";
 
 
 const Stack = createStackNavigator();
