@@ -1,0 +1,5 @@
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
+export const REGISTRATION = 'REGISTRATION'
+export const SUCCESSFUL = 'LOGIN_SUCCESSFUL'
+export const FAILED = 'LOGIN_FAILED'

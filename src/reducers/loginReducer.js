@@ -1,22 +1,34 @@
+import {FAILED, SUCCESSFUL, LOGOUT} from "../actions/types";
+
+
 const initialState = {
     userEmail : '',
     isLoggined : false,
+    error: ''
 };
 
 const loginReducer = (state = initialState,action) => {
     switch(action.type){
-        case 'LOGIN':{
+        case SUCCESSFUL:{
             console.log(state.isLoggined)
             return {
+                ...state,
                 userEmail: action.payload.email,
-                isLoggined :true
+                isLoggined :true,
+                error: '',
             }
         }
-        case 'LOGOUT' : {
+        case FAILED:{
+            console.log(action.payload)
+            return {
+                ...state,
+                error: action.payload
+            }
+        }
+        case LOGOUT : {
             console.log(state.isLoggined)
             return {
                 userEmail : '',
-                userPass : '',
                 isLoggined : false,
             }
         }
