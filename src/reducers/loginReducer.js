@@ -1,6 +1,5 @@
 import {FAILED, SUCCESSFUL, LOGOUT} from "../actions/types";
 
-
 const initialState = {
     userEmail : '',
     isLoggined : false,
