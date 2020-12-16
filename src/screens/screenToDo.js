@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity} from "react-native";
 import { useDispatch , useSelector } from "react-redux";
 import todoActions from "../actions/todoActions";
 import DataTask from "../components/dataTask";
+import {signOutRequest} from "../actions/loginActions";
 
 const ToDoScreen = (props) => {
   const dispatch = useDispatch();
@@ -26,6 +27,11 @@ const ToDoScreen = (props) => {
                 />
               ))
           }
+        </View>
+        <View>
+            <TouchableOpacity onPress={() => dispatch(signOutRequest(() => props.navigation.navigate('LoginScreen')))}>
+                <Text style={{fontSize:26}}>signOutRequest</Text>
+            </TouchableOpacity>
         </View>
         <View style={{alignItems:'auto'}}>
           <TouchableOpacity style={{backgroundColor:"white",borderWidth:1,borderRadius:100,width:40,height:40,alignItems:'center'}}

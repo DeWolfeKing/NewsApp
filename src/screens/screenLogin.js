@@ -10,7 +10,7 @@ const LoginScreen = (props) => {
   const [passInput, onChangePass] = React.useState('123');
   const resetLoginAndPass = () =>{
     onChangeEmail('dewolfeking@gmail.com')
-    onChangePass("123")
+    onChangePass("123123")
   }
   const logining = () => {
       dispatch(loginRequest(emailInput,passInput,() => props.navigation.navigate('ToDoScreen')))
@@ -20,11 +20,12 @@ const LoginScreen = (props) => {
     dispatch(registrationRequest(emailInput,passInput,() => props.navigation.navigate('ToDoScreen')))
     resetLoginAndPass()
   }
-  const {storeIsLoggined,error} = useSelector((state) => ({
+  const {storeIsLoggined,error,email} = useSelector((state) => ({
     storeIsLoggined: state.loginReducer.isLoggined,
     error: state.loginReducer.error,
-
+    email: state.loginReducer
   }))
+    console.log('BIBASI',storeIsLoggined,email)
   return (
     <View style={{
       padding: 40,
@@ -42,7 +43,7 @@ const LoginScreen = (props) => {
           onChangeText={text => onChangePass(text)}
           value={passInput} 
         />
-          <Text style={{color:'red'}}>{error}</Text>
+          {/*<Text style={{color:'red'}}>{error}</Text>*/}
          <TouchableOpacity style={{backgroundColor:"white",borderWidth:1,borderRadius:5,width:100,height:40,alignItems:'center',marginTop:5}}
                           onPress={() => logining()}
          >

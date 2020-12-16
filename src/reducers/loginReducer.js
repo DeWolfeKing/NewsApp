@@ -1,4 +1,4 @@
-import {FAILED, SUCCESSFUL, LOGOUT} from "../actions/types";
+import {FAILED, SUCCESSFUL, LOGOUT, SIGN_OUT_SUCCESSFUL, SIGN_OUT_FAILED} from "../actions/types";
 
 const initialState = {
     userEmail : '',
@@ -12,7 +12,7 @@ const loginReducer = (state = initialState,action) => {
             console.log(state.isLoggined)
             return {
                 ...state,
-                userEmail: action.payload.email,
+                userEmail: action.payload,
                 isLoggined :true,
                 error: '',
             }
@@ -24,11 +24,19 @@ const loginReducer = (state = initialState,action) => {
                 error: action.payload
             }
         }
-        case LOGOUT : {
+        case SIGN_OUT_SUCCESSFUL : {
             console.log(state.isLoggined)
             return {
                 userEmail : '',
                 isLoggined : false,
+                error : ''
+            }
+        }
+        case SIGN_OUT_FAILED:{
+            console.log(action.payload)
+            return {
+                ...state,
+                error: action.payload
             }
         }
         default :
