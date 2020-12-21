@@ -6,16 +6,16 @@ import React, { useState, useEffect } from 'react';
 const Loading = (props) => {
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState();
+
     function onAuthStateChanged(user) {
         setUser(user);
         if (initializing) setInitializing(false);
     }
+    // console.log(auth().onAuthStateChanged(onAuthStateChanged))
     useEffect(() => {
         const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-        return subscriber;
     }, []);
     if (initializing) return null;
-
     if (!user) {
         return (
             <View>
@@ -23,13 +23,13 @@ const Loading = (props) => {
                 <TouchableOpacity  onPress={props.navigation.navigate('LoginScreen')}/>
             </View>
         );
-    }
-    return (
+    }else{
+        return (
         <View>
             <ActivityIndicator size="large" color="#00ff00"/>
             <TouchableOpacity onPress={props.navigation.navigate('ToDoScreen')}/>
         </View>
-    )
-
+        )
+    }
 }
 export default Loading

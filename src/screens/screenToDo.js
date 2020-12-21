@@ -1,43 +1,52 @@
-import React, {useEffect} from "react";
-import { View, StyleSheet, Text, TouchableOpacity} from "react-native";
+import React, {useEffect, useState} from "react";
+import { View, StyleSheet, Text, TouchableOpacity,ScrollView} from "react-native";
 import { useDispatch , useSelector } from "react-redux";
-import todoActions from "../actions/todoActions";
 import DataTask from "../components/dataTask";
 import {signOutRequest} from "../actions/loginActions";
+import {deleteTodo, getTodoList} from "../actions/todoActions";
 
 const ToDoScreen = (props) => {
   const dispatch = useDispatch();
-
+  const {Name,Email,UserID} = useSelector((state) => ({
+      Name: state.loginReducer.name,
+      Email: state.loginReducer.email,
+      UserID: state.loginReducer.uid,
+  }))
   const todoList = useSelector(state => state.todoReducer.todoList)
-
   const deleteToDoItem = (name) => {
-    dispatch(todoActions.deleteTask(name))
+    dispatch(deleteTodo(name,UserID))
+    dispatch(getTodoList(UserID))
   }
-
-
+  useEffect(() => {
+      dispatch(getTodoList(UserID))
+  },[UserID])
   return (
-    <View style={styles.screen}> 
+    <View style={styles.screen}>
         <View style={{flexDirection: 'column',flex: 1}}>
-          {
-            todoList.map((item,index, array) => (
-                <DataTask
-                  onDelete={deleteToDoItem}
-                  taskName={item.taskName}
-                  styless={styles} 
-                />
-              ))
-          }
+            <ScrollView>
+                  {
+                    todoList.map((item) => (
+                        <DataTask
+                          onDelete={deleteToDoItem}
+                          taskName={item.TaskName}
+                          styless={styles}
+                        />
+                    ))
+                  }
+            </ScrollView>
         </View>
-        <View>
-            <TouchableOpacity onPress={() => dispatch(signOutRequest(() => props.navigation.navigate('LoginScreen')))}>
-                <Text style={{fontSize:26}}>signOutRequest</Text>
-            </TouchableOpacity>
-        </View>
-        <View style={{alignItems:'auto'}}>
-          <TouchableOpacity style={{backgroundColor:"white",borderWidth:1,borderRadius:100,width:40,height:40,alignItems:'center'}}
+        <View style={{alignItems:'auto',flexDirection:'row'}}>
+            <View style={{padding:10}}>
+                <Text>{Name}</Text>
+                <Text>{Email}</Text>
+                <TouchableOpacity onPress={() => dispatch(signOutRequest(() => props.navigation.navigate('LoginScreen')))}>
+                    <Text style={{fontSize:26}}>signOutRequest</Text>
+                </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={{backgroundColor:"white",borderWidth:1,borderRadius:100,width:40,height:40,alignItems:'center',marginLeft: 80}}
                             onPress={() => props.navigation.navigate('AddToDo')}>
-              <Text style={{fontSize:26}}>+</Text>
-          </TouchableOpacity>
+                <Text style={{fontSize:26}}>+</Text>
+            </TouchableOpacity>
         </View>
     </View>
   );
@@ -82,8 +91,8 @@ const styles = StyleSheet.create({
       resizeMode: 'stretch',
     },
     screen: {
-      padding: 40,
-      paddingTop: 80,
+      paddingHorizontal: 20,
+      paddingVertical:40,
       backgroundColor: '#B8E986',
       flex: 1
     },

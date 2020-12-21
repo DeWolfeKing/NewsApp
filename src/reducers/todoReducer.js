@@ -1,21 +1,30 @@
+import {FEILED_CREATE_TODO, SETUP_TODOLIST, SIGN_OUT_SUCCESSFUL} from "../actions/types";
+
 const initialState = {
-    todoList :[]
+    todoList : [],
+    error : ''
 };
 
 const todoReducer = (state = initialState,action) => {
     switch(action.type){
-        case 'ADD_TASK': {
+        case SETUP_TODOLIST : {
+            const todoList = action.payload.map((item) => (item._data))
             return{
-                ...state,
-                todoList : [...state.todoList, action.payload]
+                error: '',
+                todoList : todoList
             }
         }
-        case 'DELETE_TASK' :{
-            const newTodoList = state.todoList.filter((item) => item.taskName !== action.payload)
+        case SIGN_OUT_SUCCESSFUL :{
+            return {
+                error: '',
+                todoList: []
+            }
+        }
+        case FEILED_CREATE_TODO :{
             return {
                 ...state,
-                todoList : newTodoList
-            }        
+                error: action.payload
+            }
         }
         default :
             return state
